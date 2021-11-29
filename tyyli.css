@@ -1,7 +1,22 @@
-#container {
+#register {
     width: 80vw;
     margin: auto;
-    text-align: left;
+    text-align: center;
+    align-items: center;
+}
+
+body{
+    text-align: center;
+}
+
+form {
+    display: inline-block;
+}
+
+.lomake{
+    display: block;
+    margin: auto;
+    text-align: center;
 }
 
 input{

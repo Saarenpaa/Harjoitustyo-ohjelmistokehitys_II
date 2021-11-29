@@ -8,14 +8,33 @@
     <link rel="stylesheet" href="tyyli.css"></src>
 </head>
     <body>
-        <div id="container">
-            <form action='tietokanta_parse.php' method='POST'>
-                Käyttäjänimi: <input type='text' name='username'>
-                <br><br>
-                Salasana: <input tupe='password' name='password'>
-                <br><br>
-                <input type='submit' name='login' value='Rekisteröidy'>
-            </form>
+        <div id="register">
+            <div class="lomake">
+                <form action='rekisteröidy_parse.php' method='POST'>
+                    <table>
+                        <tr>
+                            <td>Etunimi: </td>
+                            <td><input type='text' name='firstname'></td>
+                        </tr>
+                        <tr>
+                            <td>Sukunimi: </td>
+                            <td><input type='text' name='lastname'></td>
+                        </tr>
+                        <tr>
+                            <td>Käyttäjänimi: </td>
+                            <td><input type='text' name='username'></td>
+                        </tr>
+                        <tr>
+                            <td>Salasana:</td>
+                            <td><input type='password' name='password'></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type='submit' name='login' value='Rekisteröidy'></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
         </div>
     </body>
 </html>
