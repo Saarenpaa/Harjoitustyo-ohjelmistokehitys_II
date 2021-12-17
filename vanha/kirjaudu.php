@@ -9,7 +9,7 @@
 </head>
     <body>
         <div id="container">
-            <form action='kirjaudu.php' method='POST'>
+            <form action='kirjaudu_parse.php' method='POST'>
                 <table>
                     <tr>
                         <td>Käyttäjänimi: </td>
