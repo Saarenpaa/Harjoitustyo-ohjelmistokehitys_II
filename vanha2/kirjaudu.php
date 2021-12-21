@@ -6,7 +6,7 @@ require_once("database.php");
 
 
 $username = $_POST['username'];
-$password = $_POST['password'];
+$pw = $_POST['password'];
 
 try {
     // Muodostetaan yhteys tietokantaan

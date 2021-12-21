@@ -1,0 +1,27 @@
+<?php session_start(); ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="tyyli.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+
+        <h1>Kirjaudu sisään</h1>
+        <div class="content" action="kirjaudu.php">
+            <form method="post" action="kirjaudu.php">
+                <p><input name="username" type="text" placeholder="Käyttäjänimi" required></p>
+                <p><input name="password" type="password" placeholder="Salasana" required></p>
+                <p><input type="submit" value="Kirjaudu"></p>
+                <p>Tai</p> 
+                <p><a href="rekisteroidy_page.php">Luo uusi käyttäjä</a></p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

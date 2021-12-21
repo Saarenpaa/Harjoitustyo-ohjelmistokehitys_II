@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php session_start(); ?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -13,15 +13,22 @@
             <h1 class="titleKirjaudu">Kirjaudu</h1>
         </div>
         <div class="formdiv">
-            <form method="post">
+            <form method="post" action="kirjaudu.php">
+                <?php
+                    if(isset($_SESSION["email_error"]) === true) {
+                        echo "<div style='color:red'>" . $_SESSION["email_error"] . "</div>";
+                    }
+
+                    $_SESSION["email_error"] = null;
+                ?>
                 <table>
                     <div>
                         <div>Käyttäjätunnus:</div>
-                        <div><input id="username" type="text"></div>
+                        <div><input name="username" type="text" required></div>
                     </div>
                     <div>
                         <div>Salasana:</div>
-                        <div><input id="password" type="text"></div>
+                        <div><input name="password" type="password" required></div>
                     </div>
                     <div>
                         <div></div>
