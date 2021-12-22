@@ -5,49 +5,50 @@ session_start();
 require_once("database.php");
 
 
-$username = $_POST['username'];
+$email = $_POST['email'];
 $password = $_POST['password'];
 
 try {
     // Muodostetaan yhteys tietokantaan
     $conn = ConnectToDB();
 
-    $stmt = $conn->prepare("SELECT * from users WHERE username='". $username . "'");
+    $stmt = $conn->prepare("SELECT * from users WHERE user_email='". $email . "'");
     $stmt->execute();
 
-    $data = $stmt->fetchAll(); // array[][] - taulukko
+    $data = $stmt->fetchAll(); // luo arrayn haetuista tiedoista
 
-
+	// Suorittaa jos käyttäjän tietoja löytyy
 	if(count($data) === 1)
 	{
-		// Käyttäjänimi täsmää
 		$users = $data[0]; // array[] - "id" => x, "password" => x
+
 		$pwInDB = $users["password"];
-		$usernameInDB = $users["username"];
+		$emailInDB = $users["user_email"];
 		$userId = $users["user_id"];
 		
 		// Tarkista salasana
-		if(strcmp($pw, $pwInDB) === 0) {
-			// Annettu salasana täsmää tietokannassa tallennetun arvon kanssa
-			// Päästetän käyttäjä sisään sovellukseen
-			// Tallennetaan käyttäjän tiedot istuntoon
-			//$_SESSION["userId"] = $userId;
-			//$_SESSION["username"] = $usernameInDB;
+		if(strcmp($password, $pwInDB) === 0) {
+
+			// Tallenna tiedot sessioon
+			$_SESSION['userId'] = $userId;
+			$_SESSION['email'] = $emailInDB;
+
+			//Päästä käyttäjä sisälle
 			header("Location: front_page.html", true, 301);
 			exit;
 		}
 		else {
 			// Salasana on virheellinen
-			$_SESSION["email_error"] = "Väärä salasana.";
+			$_SESSION['email_error'] = "Väärä salasana.";
 			header("Location: index.php", true, 301);
 			exit;
 		}
 	}
 	else
 	{
-		// Joku muu, ei löydy käyttäjä tai useampi
-		$_SESSION["email_error"] = "Käyttäjänimeä ei löydy.";
-		header("Location: index.php", true, 301);
+		// Käyttäjää ei ole tai löytyy useampi
+		$_SESSION['email_error'] = "Käyttäjänimeä ei löydy.";
+		header('Location: '.$_SERVER['REQUEST_URI']);
 		exit;
 	}
 	

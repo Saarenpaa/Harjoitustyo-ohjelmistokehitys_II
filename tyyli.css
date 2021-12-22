@@ -6,6 +6,7 @@
     width: 50vw;
     background-color: rgb(241, 241, 241);
     padding: 20px;
+    border-radius: 10px;
 }
 
 .content{
@@ -15,6 +16,53 @@
     display: float;
     width: 200px;
     margin: auto;
+}
+/*thread content classes*/
+.thread{
+    background-color: rgb(250,250,250);
+    padding: 5px;
+}
+
+.thread_topic{
+    margin-bottom: 5px;
+    text-align: left;
+    width: 30vw;
+    height: 20px;
+    resize: none;
+    overflow: hidden;
+    font-size: large;
+    font-style: bold;
+}
+
+.thread_summary{
+    margin-bottom: 5px;
+    text-align: left;
+    font-size: smaller;
+    width: 40vw;
+    height: auto;
+    resize: none;
+}
+
+.timestamp{
+    text-align: right;
+    font-size: small;
+}
+
+.thread_button{
+    border: none;
+    background-color: black;
+    color: white;
+    border-style: solid;
+    border-radius: 5px;
+}
+/*thread content classes end*/
+
+*{
+    font-family: 'Roboto', sans-serif;
+}
+
+ol {
+    list-style: none;
 }
 
 h1, p{
