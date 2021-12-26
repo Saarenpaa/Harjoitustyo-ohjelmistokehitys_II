@@ -25,16 +25,20 @@ try {
 		$pwInDB = $users["password"];
 		$emailInDB = $users["user_email"];
 		$userId = $users["user_id"];
-		
+		$fname = $users["user_firstname"];
+		$lname = $users["user_lastname"];
+
 		// Tarkista salasana
 		if(strcmp($password, $pwInDB) === 0) {
 
 			// Tallenna tiedot sessioon
 			$_SESSION['userId'] = $userId;
 			$_SESSION['email'] = $emailInDB;
+			$_SESSION['fname'] = $fname;
+			$_SESSION['lname'] = $lname;
 
 			//Päästä käyttäjä sisälle
-			header("Location: front_page.html", true, 301);
+			header("Location: front_page.php", true, 301);
 			exit;
 		}
 		else {
@@ -47,8 +51,8 @@ try {
 	else
 	{
 		// Käyttäjää ei ole tai löytyy useampi
-		$_SESSION['email_error'] = "Käyttäjänimeä ei löydy.";
-		header('Location: '.$_SERVER['REQUEST_URI']);
+		$_SESSION['email_error'] = "Väärä sähköposti";
+		header('Location: index.php', true, 301);
 		exit;
 	}
 	

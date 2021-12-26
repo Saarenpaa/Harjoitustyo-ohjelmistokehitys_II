@@ -1,5 +1,64 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;1,300&display=swap');
 
+.header{
+    grid-column-start: 1;
+    grid-column-end: 4;
+    background-color: black;
+    border-bottom: 1px solid white;
+}
+
+.header_title{
+    display: inline-flex;
+    float: left;
+}
+
+.header_links{
+    display: inline-flex;
+    float: right;
+    outline: 1px solid white;
+}
+.user_info{
+    display: inline-flex;
+    float: left;
+    outline: 1px solid white;
+}
+
+.header_links a, .header_links a:visited,
+.header_title a, .header_title a:visited,
+.user_info a{
+    font-size: xx-large;
+    text-decoration: none;
+    color: white;
+    padding-right: 20px;
+}
+
+.footer{
+    grid-column-start: 1;
+    grid-column-end: 4;
+    background-color: black;
+    border-top: 1px solid white;
+}
+
+/* Container classes for every page (if necessary) */
+.container_kirjaudu{
+    width: 25vw;
+    background-color: black;
+    padding: 20px;
+    border-radius: 10px;
+    margin: auto;
+    margin-top: 25vh;
+    text-align: center;
+}
+
+.container_front{ 
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto; 
+    column-gap: 10px;
+    display: grid;
+    box-sizing: border-box;
+    row-gap: 15px;
+}
+
 .container{
     margin: auto;
     margin-top: 20px;
@@ -11,16 +70,31 @@
 
 .content{
     padding: 10px;
-    border: black solid;
-    border-radius: 20px;
-    display: float;
+    border: white solid;
+    border-radius: 5px;
     width: 200px;
     margin: auto;
+    background-color:black;
 }
-/*thread content classes*/
+/* thread content classes */
+.listOf_threads{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    border-left: 1px solid white;
+}
 .thread{
-    background-color: rgb(250,250,250);
+    background-color: black;
     padding: 5px;
+    box-sizing: border-box;
+}
+.new_thread{
+    background-color: black;
+    padding: 5px;
+    box-sizing: border-box;
+}
+.container_front div, .header .listOf_threads{
+    padding: 10px;
+    border: 3px, solid, white;
 }
 
 .thread_topic{
@@ -46,6 +120,7 @@
 .timestamp{
     text-align: right;
     font-size: small;
+    font-style: italic;
 }
 
 .thread_button{
@@ -55,26 +130,50 @@
     border-style: solid;
     border-radius: 5px;
 }
-/*thread content classes end*/
+.new_thread_button{
+    border: none;
+    background-color: black;
+    color: white;
+    border-style: solid;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+/* thread content classes end */
 
 *{
     font-family: 'Roboto', sans-serif;
+    color: white;
+}
+
+/* tag definitions */
+
+html{
+    background: black;
+}
+
+input, textarea{
+    background: rgb(51, 51, 51);
+    border: none;
+    border-bottom: 1px solid white;
 }
 
 ol {
     list-style: none;
+    padding-left: 0px;
 }
 
-h1, p{
-    text-align: center;
+h1{
     font-style: bold;
     font-family: 'Roboto', sans-serif;
 }
 
-a{
-    color:black;
+p{
+    font-style: bold;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    color: white;
 }
 
-a:visited{
-    color:gray;
+a{
+    color: white;
 }
