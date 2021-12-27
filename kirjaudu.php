@@ -38,7 +38,7 @@ try {
 			$_SESSION['lname'] = $lname;
 
 			//Päästä käyttäjä sisälle
-			header("Location: front_page.php", true, 301);
+			header("Location: thread_page.php", true, 301);
 			exit;
 		}
 		else {

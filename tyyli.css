@@ -88,9 +88,14 @@
     box-sizing: border-box;
 }
 .new_thread{
+    display: block;
     background-color: black;
-    padding: 5px;
     box-sizing: border-box;
+    overflow: hidden;
+    max-height: 1500px;
+    width: auto;
+    padding: 5px;
+    transition: max-height 1s ease-out;
 }
 .container_front div, .header .listOf_threads{
     padding: 10px;
@@ -100,7 +105,7 @@
 .thread_topic{
     margin-bottom: 5px;
     text-align: left;
-    width: 30vw;
+    width: 25vw;
     height: 20px;
     resize: none;
     overflow: hidden;
@@ -108,12 +113,37 @@
     font-style: bold;
 }
 
+#thread_img{
+    float: top;
+    border: none;
+    background-color: black;
+}
+
+.thread_img{
+    height: 70px;
+    width: 70px;
+}
+
+.thread_img img{
+    height: 70px;
+    width: 70px;
+}
+
 .thread_summary{
     margin-bottom: 5px;
     text-align: left;
     font-size: smaller;
-    width: 40vw;
+    width: 25vw;
     height: auto;
+    resize: none;
+}
+
+.thread_content{
+    margin-bottom: 5px;
+    text-align: left;
+    font-size: smaller;
+    width: 25vw;
+    height: 250px;
     resize: none;
 }
 
@@ -130,6 +160,7 @@
     border-style: solid;
     border-radius: 5px;
 }
+
 .new_thread_button{
     border: none;
     background-color: black;
@@ -137,6 +168,12 @@
     border-style: solid;
     border-radius: 5px;
     margin-left: 10px;
+}
+
+.thread_inputs{
+    height: auto;
+    width: auto;
+    float: right;
 }
 /* thread content classes end */
 

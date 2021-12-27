@@ -2,8 +2,6 @@
 
 session_start();
 
-require_once("auth.php");
-tarkistaEttäOnKirjautunut();
 
 require_once("database.php"); // Vastaa C#  using-direktiiviä
 require_once("config.php");

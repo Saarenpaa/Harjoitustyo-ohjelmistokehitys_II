@@ -14,7 +14,7 @@ date_default_timezone_set('Europe/Helsinki');
     <link rel="stylesheet" href="tyyli.css">
     <title>Front page</title>
 
-    <script type=module src=scripts.js></script>
+    <!--<script type=module src=scripts.js></script>-->
 
 </head>
 <body>
@@ -41,13 +41,7 @@ date_default_timezone_set('Europe/Helsinki');
 
         <ol class="listOf_threads">
             <div class="thread">
-                <li><form method="POST" action="luo_aihe.php">
-                        <p class="thread_topic" placeholder="">Thread topic</p></li>
-                        <p class="thread_summary">Summary</p>
-                        <br>
-                        <p class="timestamp"> 12/22/2021 by Joonas</p>
-                    </form>
-                    <hr>
+                <li>
                 </li>
             </div>
 
@@ -56,14 +50,18 @@ date_default_timezone_set('Europe/Helsinki');
             <!--comment box-->
             <div id="new_thread" class="new_thread">
                 <li><form method="POST" action="luo_aihe.php">
-                        <input name=""class="thread_topic" placeholder="Thread topic"></li>
-                        <textarea maxlength="200" class="thread_summary" placeholder="content (max 200 characters)"></textarea>
-                        <br>
-                        <input class="thread_button" type="submit" value="Post">
+                            <img title="kuva" class="thread_img" type="image">
+                            <input type="file" accept ="image/png, image/jpeg" id="thread_img" name="thread_img"><br>
+                            <input name="topic" class="thread_topic" placeholder="Topic">
+                            <textarea maxlength="100" class="thread_summary" placeholder="Summary (max 100 characters)"></textarea>
+                            <textarea class="thread_content" placeholder="Content"></textarea>
+                            <br>
+                            <input class="thread_button" type="submit" value="Post">
                     </form>
                     <hr>
                 </li>
             </div>
+        
         </ol>
         <div class="footer">
             <h1>Footer</h1>
@@ -71,15 +69,25 @@ date_default_timezone_set('Europe/Helsinki');
     </div>
     <script>
         function newComment(){
-            var thread = document.getElementById("new_thread");
+            function getStyle(id, name){
+                var element = document.getElementById(id);
+                return element.currentStyle ? element.currentStyle[name] : window.getComputedStyle ? window.getComputedStyle(element, null).getPropertyValue(name) : null;
+            };
+            
+            var new_thread = document.getElementById('new_thread');
+            var display_style = getStyle('new_thread', 'display');
 
-            if(thread.style.display == 'none'){
-                thread.style.display = 'block';
+            if(display_style == 'none'){
+                new_thread.style.display = 'block';
+                setTimeout(new_thread.style.maxHeight = '1500px',1000);
+                //new_thread.style.transition = 'max-height 0.25s ease-in';
             }
             else{
-                thread.style.display = 'none';
-            }
-        }
+                new_thread.style.maxHeight = '0px';
+                new_thread.style.display = 'none';
+                //new_thread.style.transition = 'max-height 0.15s ease-out';
+            };
+        };
     </script>
 </body>
 </html>
