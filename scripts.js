@@ -1,9 +1,10 @@
-
+// Funktio joka hakee tyylitiedon CSS tiedostosta. Kopioitu stackoverflowsta.
 function getStyle(id, name){
   var element = document.getElementById(id);
   return element.currentStyle ? element.currentStyle[name] : window.getComputedStyle ? window.getComputedStyle(element, null).getPropertyValue(name) : null;
 };
 
+// Funktio joka näyttää kommentti-kentän nappia painamalla.
 function newComment(){
   
   var new_thread = document.getElementById('new_thread');

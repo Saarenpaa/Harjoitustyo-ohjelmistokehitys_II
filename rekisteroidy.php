@@ -13,7 +13,7 @@ try{
 
     $conn = ConnectToDB();
 
-    $stmt = $conn->prepare("INSERT INTO users (user_firstname, user_lastname, password, user_email)
+    $stmt = $conn->prepare("INSERT INTO Users (user_firstname, user_lastname, password, user_email)
     VALUES('".$fname."', '".$lname."', '".$password."', '".$email."')");
     $stmt->execute();
 

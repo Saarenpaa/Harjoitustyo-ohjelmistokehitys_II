@@ -12,7 +12,7 @@ try {
     // Muodostetaan yhteys tietokantaan
     $conn = ConnectToDB();
 
-    $stmt = $conn->prepare("SELECT * from users WHERE user_email='". $email . "'");
+    $stmt = $conn->prepare("SELECT * from Users WHERE user_email='". $email . "'");
     $stmt->execute();
 
     $data = $stmt->fetchAll(); // luo arrayn haetuista tiedoista
@@ -38,7 +38,7 @@ try {
 			$_SESSION['lname'] = $lname;
 
 			//Päästä käyttäjä sisälle
-			header("Location: thread_page.php", true, 301);
+			header("Location: front_page.php", true, 301);
 			exit;
 		}
 		else {

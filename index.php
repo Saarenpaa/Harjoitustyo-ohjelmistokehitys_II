@@ -20,7 +20,9 @@
 
                         echo '<p>'.$_SESSION['email_error'].'</p>';
 
-                        };   ?>
+                        };
+                        $_SESSION['email_error'] = null;
+                        ?>
                 <p><input name="email" type="text" placeholder="Sähköposti" required></p>
                 <p><input name="password" type="password" placeholder="Salasana" required></p>
                 <p><input class="thread_button" type="submit" value="Kirjaudu"></p>
