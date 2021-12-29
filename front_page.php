@@ -12,7 +12,7 @@ date_default_timezone_set('Europe/Helsinki');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="tyyli.css">
-    <script src="scripts.js"></script>
+    <script type="module" src="scripts.js"></script>
     <title>Front page</title>
 
     <!--<script type=module src=scripts.js></script>-->
@@ -21,26 +21,11 @@ date_default_timezone_set('Europe/Helsinki');
 <body>
 
     <div class="container_front">
-        <div class="header">
-            <div class="header_title"><a href="#">Tervetuloa Foorumille</a></div>
-            <div class="user_info">
-                <a href="#"><?php
-                    $fname = $_SESSION['fname'];
-                    $lname = $_SESSION['lname'];
-
-                    echo $fname." ".$lname."!";
-                ?></a>
-            </div>
-            <div class="header_links">
-                <a href="#">Home</a>
-                <a href="#">Contacts</a>
-                <a href="#">FAQ</a>
-            </div>
-        </div>
-
-
+        
+        <?php include("templates/header.php") ?>
 
         <ol class="listOf_threads">
+
         <button class="new_thread_button" onclick="newComment()">Luo uusi lanka</button>
 
         <!--comment box-->
@@ -84,7 +69,7 @@ date_default_timezone_set('Europe/Helsinki');
                     <li>
                         <form method='GET' action ='thread_page.php'>
                         <input name='thread_id' type='text' value=".$row['thread_ID']." hidden>
-                        <input type='submit' value=".$row['thread_topic']." class='thread_topic_button'>
+                        <input type='submit' value=".'"'.$row['thread_topic'].'"'." class='thread_topic_button'>
                         </form>
                         <img class='thread_image'></img>
                         <p class='thread_summary'>".$row['thread_summary']."</p>
@@ -96,9 +81,9 @@ date_default_timezone_set('Europe/Helsinki');
             }
         ?>
         </ol>
-        <div class="footer">
-            <h1>Footer</h1>
-        </div>
+
+        <?php include("templates/footer.php") ?>
+        
     </div>
 </body>
 </html>

@@ -21,25 +21,9 @@ date_default_timezone_set('Europe/Helsinki');
 <body>
 
     <div class="container_front">
-        <div class="header">
-            <div class="header_title"><a href="#">Tervetuloa Foorumille</a></div>
-            <div class="user_info">
-                <a href="#"><?php
-                    $fname = $_SESSION['fname'];
-                    $lname = $_SESSION['lname'];
-
-                    echo $fname." ".$lname."!";
-                ?></a>
-            </div>
-            <div class="header_links">
-                <a href="#">Home</a>
-                <a href="#">Contacts</a>
-                <a href="#">FAQ</a>
-            </div>
-        </div>
-
-
-
+        
+        <?php include("templates/header.php") ?>
+        
         <ol class="listOf_threads">
         
         <?php
@@ -75,10 +59,7 @@ date_default_timezone_set('Europe/Helsinki');
                 echo "
                 <div class='thread'>
                     <li>
-                        <form method='GET' action ='thread_page.php'>
-                        <input type='text' value=".$row['thread_ID']." hidden>
-                        <input type='submit' value=".$row['thread_topic']." class='thread_topic_button'>
-                        </form>
+                        <h1 class='thread_topic_button'>".$row['thread_topic']."</h1>
                         <img class='thread_image'></img>
                         <p class='thread_summary'>".$row['thread_summary']."</p>
                         <p class='thread_content'>".$row['thread_content']."</p>
@@ -136,9 +117,7 @@ date_default_timezone_set('Europe/Helsinki');
                 </li>
             </div>
         </ol>
-        <div class="footer">
-            <h1>Footer</h1>
-        </div>
+        <?php include("templates/footer.php") ?>
     </div>
 </body>
 </html>

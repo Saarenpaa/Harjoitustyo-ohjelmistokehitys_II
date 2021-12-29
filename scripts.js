@@ -21,3 +21,6 @@ function newComment(){
       //new_thread.style.transition = 'max-height 0.15s ease-out';
   };
 };
+
+
+// Header
