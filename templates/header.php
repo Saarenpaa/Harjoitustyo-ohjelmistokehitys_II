@@ -1,5 +1,5 @@
 <div class="header">
-    <div class="header_title"><a href="#">Tervetuloa Foorumille</a></div>
+    <div class="header_title"><a href="front_page.php">Tervetuloa Foorumille</a></div>
     <div class="user_info">
         <a href="#"><?php
             $fname = $_SESSION['fname'];
@@ -9,7 +9,7 @@
         ?></a>
     </div>
     <div class="header_links">
-        <a href="#">Home</a>
+        <a href="front_page.php">Home</a>
         <a href="#">Contacts</a>
         <a href="#">FAQ</a>
     </div>

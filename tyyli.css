@@ -17,10 +17,12 @@
     float: right;
     outline: 1px solid white;
 }
+
 .user_info{
     display: inline-flex;
     float: left;
     outline: 1px solid white;
+    padding: 0px;
 }
 
 .header_links a, .header_links a:visited,
@@ -30,6 +32,7 @@
     text-decoration: none;
     color: white;
     padding-right: 20px;
+    padding-left: 20px;
 }
 
 .footer{
