@@ -22,5 +22,21 @@ function newComment(){
   };
 };
 
+function FAQcollapsible(){
+  var kysymykset = document.getElementsByClassName("question");
+
+  for (var i = 0; i < kysymykset.length; i++) {
+  
+  kysymykset[i].addEventListener("click", function() {
+  
+      var content = this.nextElementSibling;
+      if (content.style.display === "block") {
+      content.style.display = "none";
+      } else {
+      content.style.display = "block";
+      }
+  });
+  };
+};
 
 // Header

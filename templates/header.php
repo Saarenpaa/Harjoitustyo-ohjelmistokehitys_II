@@ -10,7 +10,7 @@
     </div>
     <div class="header_links">
         <a href="front_page.php">Home</a>
-        <a href="#">Contacts</a>
-        <a href="#">FAQ</a>
+        <a href="contacts.php">Contacts</a>
+        <a href="faq.php">FAQ</a>
     </div>
 </div>

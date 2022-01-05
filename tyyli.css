@@ -42,6 +42,17 @@
     border-top: 1px solid white;
 }
 
+.footer-left{
+    display:inline-flex;
+    float: left;
+}
+
+.footer-right{
+    display: inline-flex;
+    float: right;
+}
+
+
 /* Container classes for every page (if necessary) */
 .container_kirjaudu{
     width: 25vw;
@@ -64,11 +75,12 @@
 
 .container{
     margin: auto;
-    margin-top: 20px;
+    margin-top: 200px;
     width: 50vw;
-    background-color: rgb(241, 241, 241);
+    background-color: black;
     padding: 20px;
     border-radius: 10px;
+    text-align: center;
 }
 
 .content{
@@ -86,12 +98,13 @@
     grid-column-start: 2;
     grid-column-end: 3;
     border-left: 1px solid white;
+    min-height: 600px;
+    padding-left: 10px;
 }
 .thread{
     background-color: black;
     padding: 5px;
     box-sizing: border-box;
-    border: 0px solid white;
 }
 .new_thread{
     display: none;
@@ -246,4 +259,39 @@ p{
 
 a{
     color: white;
+}
+
+#timer {
+    font-size: 200px;
+}
+
+/*FAQ page*/
+
+.question_border{
+    border: 2px solid white;
+    margin: 20px;
+}
+.question{
+    color: white;
+    cursor: pointer;
+    background-color: transparent;
+
+    padding: 20px;
+    width: 700px;
+    text-align: left;
+    font-size: 25px;
+    border: none;
+}
+.answer{
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: black;
+}
+
+/*FAQ end*/
+/*Contact us*/
+.italic_span{
+    font-style: italic;
+    font-size: smaller;
 }
