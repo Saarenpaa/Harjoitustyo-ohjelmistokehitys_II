@@ -1,7 +1,12 @@
+<?php
+require_once("aut.php");
+tarkistaUserId();
+
+?>
 <div class="header">
     <div class="header_title"><a href="front_page.php">Tervetuloa Foorumille</a></div>
     <div class="user_info">
-        <a href="#"><?php
+        <a href="user.php"><?php
             $fname = $_SESSION['fname'];
             $lname = $_SESSION['lname'];
 

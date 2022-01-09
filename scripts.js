@@ -39,4 +39,11 @@ function FAQcollapsible(){
   };
 };
 
+/*function commentFilter(){
+  var filter = document.getElementById("filter");
+
+  filter.addEventListener("select", onselectionchange)
+  if (filter = )
+}*/
+
 // Header

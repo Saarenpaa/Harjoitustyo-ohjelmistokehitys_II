@@ -65,12 +65,12 @@
 }
 
 .container_front{ 
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto auto auto; 
-    column-gap: 10px;
     display: grid;
-    box-sizing: border-box;
+    grid-template-columns: 1fr 600px 1fr;
+    grid-template-rows: auto auto auto;
     row-gap: 15px;
+    column-gap: 10px;
+    box-sizing: border-box;
 }
 
 .container{
@@ -105,6 +105,7 @@
     background-color: black;
     padding: 5px;
     box-sizing: border-box;
+    word-wrap: break-word;
 }
 .new_thread{
     display: none;
@@ -124,20 +125,22 @@
 .thread_topic{
     margin-bottom: 5px;
     text-align: left;
-    width: 25vw;
+    width: auto;
     height: 20px;
     resize: none;
     overflow: hidden;
     font-size: large;
     font-style: bold;
+    display: inline-flex;
 }
 .thread_topic_button{
     border: none;
     padding: 0;
     background-color: black;
-    color: white;
+    text-align: left;
     font-size: x-large;
     cursor: pointer;
+    word-wrap: break-word;
 }
 .thread_topic_button:hover{
     text-decoration: underline;
@@ -294,4 +297,8 @@ a{
 .italic_span{
     font-style: italic;
     font-size: smaller;
+}
+.filter{
+    background-color: black;
+    display: inline-flex;
 }

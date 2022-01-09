@@ -69,7 +69,7 @@ date_default_timezone_set('Europe/Helsinki');
                     <li>
                         <form method='GET' action ='thread_page.php'>
                         <input name='thread_id' type='text' value=".$row['thread_ID']." hidden>
-                        <input type='submit' value=".'"'.$row['thread_topic'].'"'." class='thread_topic_button'>
+                        <button type='submit' class='thread_topic_button'>".$row['thread_topic']."</button>
                         </form>
                         <img class='thread_image'></img>
                         <p class='thread_summary'>".$row['thread_summary']."</p>

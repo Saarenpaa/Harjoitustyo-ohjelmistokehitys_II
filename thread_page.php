@@ -1,8 +1,15 @@
 <?php
 
+include("aut.php");
+
+tarkistaThreadId();
+
 session_start();
 
 date_default_timezone_set('Europe/Helsinki');
+
+//checkThreadIdSelection();
+
 ?>
 
 <!DOCTYPE html>
@@ -35,12 +42,12 @@ date_default_timezone_set('Europe/Helsinki');
 
                 $thread_index = $_GET['thread_id'];
 
-                $stmt = $conn->prepare("SELECT Threads.*, Users.user_firstname, Users.user_lastname
+                $stmt_thread = $conn->prepare("SELECT Threads.*, Users.user_firstname, Users.user_lastname
                                         FROM Threads
                                         INNER JOIN Users ON Threads.user_id = Users.user_id
                                         WHERE Threads.thread_ID = ".$thread_index."");
-                $stmt->execute();
-                $thread = $stmt->fetchAll();
+                $stmt_thread->execute();
+                $thread = $stmt_thread->fetchAll();
 
                 $stmt_comments = $conn->prepare("SELECT Comments.*, Users.user_firstname, Users.user_lastname, Threads.thread_ID
                                                 FROM ((Comments
@@ -54,7 +61,7 @@ date_default_timezone_set('Europe/Helsinki');
                 $e->getMessage();
             }
 
-
+            // luo aiheen pää tekstin
             foreach($thread as $row){
                 echo "
                 <div class='thread'>
@@ -84,10 +91,18 @@ date_default_timezone_set('Europe/Helsinki');
                     <hr>
                 </li>
             </div>
-            <?php
-            echo "<div class='thread'><p class='thread_topic'>Kommentit:</p></div>
-            <hr>";
+            <div class='thread'>
+                <p class='thread_topic'>Kommentit:</p>
+                <select onclick="commentFilter();" name="Filter" id="filter" class="filter">
+                    <option value="Uusin ensin">Uusin ensin</option>
+                    <option value="Vanhin ensin">Vanhin ensin</option>
+                </select>
+            </div>
+            <hr>
 
+            <?php
+
+            // tulostaa jokaisen tähän aiheeseen kuuluvan kommentin.
             foreach($comment as $row){
                 echo "
                 <div class='thread'>
@@ -119,5 +134,8 @@ date_default_timezone_set('Europe/Helsinki');
         </ol>
         <?php include("templates/footer.php") ?>
     </div>
+    <script>
+        commentFilter();
+    </script>
 </body>
 </html>
