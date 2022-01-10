@@ -28,8 +28,8 @@ try {
 		$fname = $users["user_firstname"];
 		$lname = $users["user_lastname"];
 
-		// Tarkista salasana
-		if(strcmp($password, $pwInDB) === 0) {
+		// Tarkistaa salasanan hashin tietokannasta
+		if(password_verify($password, $pwInDB)) {
 
 			// Tallenna tiedot sessioon
 			$_SESSION['userId'] = $userId;

@@ -2,13 +2,33 @@
 
 include("aut.php");
 
+// Tarkistaa, että thread id on valittu, ettei tule erroreita.
 tarkistaThreadId();
 
 session_start();
 
 date_default_timezone_set('Europe/Helsinki');
 
-//checkThreadIdSelection();
+//Uuden kommentin template
+function commentBox(){
+    $date = date('Y-m-d H:i');
+    echo'
+        <button class="new_thread_button">Kommentoi</button>
+
+        <div id="new_thread" class="new_thread">
+            <li><form method="POST" action="new_comment.php">
+                        <textarea name="comment_content" class="comment_content" placeholder="Comment" required></textarea>
+                        <!--        Get the date and time with php      v         -->
+                        <input name="comment_date" value="'.$date.'" hidden>
+                        <input name="comment_by" value="'.$_SESSION['userId'].'" hidden>
+                        <input name="thread_ID" value="'.$_GET['thread_id'].'" hidden>
+                        <br>
+                        <input class="thread_button" type="submit" value="Lähetä">
+                </form>
+                <hr>
+            </li>
+        </div>';
+}
 
 ?>
 
@@ -26,42 +46,46 @@ date_default_timezone_set('Europe/Helsinki');
 
 </head>
 <body>
-
     <div class="container_front">
         
         <?php include("templates/header.php") ?>
-        
+        <!-- Sama toimintatapa kuin etusivulla -->
         <ol class="listOf_threads">
         
         <?php
 
+            //include("get_thread_info.php");
             require_once("database.php");
 
             try{
                 $conn = ConnectToDB();
-
+        
                 $thread_index = $_GET['thread_id'];
-
+                
+                //Haetaan langan aiheen tiedot
                 $stmt_thread = $conn->prepare("SELECT Threads.*, Users.user_firstname, Users.user_lastname
                                         FROM Threads
                                         INNER JOIN Users ON Threads.user_id = Users.user_id
                                         WHERE Threads.thread_ID = ".$thread_index."");
                 $stmt_thread->execute();
-                $thread = $stmt_thread->fetchAll();
+                $thread = $stmt_thread->fetchAll(PDO::FETCH_ASSOC);
 
+                //Haetaan kommenttien tiedot
                 $stmt_comments = $conn->prepare("SELECT Comments.*, Users.user_firstname, Users.user_lastname, Threads.thread_ID
                                                 FROM ((Comments
                                                 INNER JOIN Users ON Comments.user_id = Users.user_id)
                                                 INNER JOIN Threads ON Comments.thread_ID = Threads.thread_ID)
-                                                WHERE Comments.thread_ID = ".$thread_index."");
+                                                WHERE Comments.thread_ID = :thread_index
+                                                ORDER BY Comments.Comment_date DESC");
+                $stmt_comments->bindParam(':thread_index', $thread_index);
                 $stmt_comments->execute();
-                $comment = $stmt_comments->fetchAll();
+
+                $comment = $stmt_comments->fetchAll(PDO::FETCH_ASSOC);
             }
             catch(PDOException $e){
                 $e->getMessage();
-            }
-
-            // luo aiheen pää tekstin
+            };
+            // luo langan aihe
             foreach($thread as $row){
                 echo "
                 <div class='thread'>
@@ -76,36 +100,28 @@ date_default_timezone_set('Europe/Helsinki');
                     </li>
                 </div>";
             };
+
+            //Uuden kommentin template
+            commentBox();
             ?>
-            <button class="new_thread_button" onclick="newComment()">Luo kommentti</button>
-            <div id="new_thread" class="new_thread">
-                <li><form method="POST" action="new_comment.php">
-                            <textarea name="comment_content" class="comment_content" placeholder="Comment" required></textarea>
-                            <!--        Get the date and time with php      v         -->
-                            <input name="comment_date" <?php echo "value='".date('Y-m-d H:i')."'" ?> hidden>
-                            <input name="comment_by" <?php echo "value='".$_SESSION['userId']."'" ?> hidden>
-                            <input name="thread_ID" <?php echo "value='".$_GET['thread_id']."'" ?> hidden>
-                            <br>
-                            <input class="thread_button" type="submit" value="Kommentoi">
-                    </form>
-                    <hr>
-                </li>
-            </div>
             <div class='thread'>
                 <p class='thread_topic'>Kommentit:</p>
-                <select onclick="commentFilter();" name="Filter" id="filter" class="filter">
-                    <option value="Uusin ensin">Uusin ensin</option>
-                    <option value="Vanhin ensin">Vanhin ensin</option>
-                </select>
+            <!-- kommenttien filteröinti -->
+                <form method="POST">
+                    <select onchange="this.form.submit()" name="filter" id="filter" class="filter">
+                        <option value="Uusin ensin">Uusin ensin</option>
+                        <option value="Vanhin ensin">Vanhin ensin</option>
+                    </select>
+                </form>
             </div>
             <hr>
 
             <?php
 
-            // tulostaa jokaisen tähän aiheeseen kuuluvan kommentin.
+            //Tulostaa jokaisen tähän lankaan kuuluvan kommentin kommenttiosioon.
             foreach($comment as $row){
                 echo "
-                <div class='thread'>
+                <div class='thread' id='".$row['comment_ID']."'>
                     <li>
                         <p class='thread_summary'>".$row['comment_content']."</p>
                         <br>
@@ -114,28 +130,16 @@ date_default_timezone_set('Europe/Helsinki');
                     </li>
                 </div>";
             }
-        ?>
-            <!--comment box-->
-            <button class="new_thread_button" onclick="newComment()">Luo kommentti</button>
 
-            <div id="new_thread" class="new_thread">
-                <li><form method="POST" action="new_comment.php">
-                            <textarea name="comment_content" class="comment_content" placeholder="Comment" required></textarea>
-                            <!--        Get the date and time with php      v         -->
-                            <input name="comment_date" <?php echo "value='".date('Y-m-d H:i')."'" ?> hidden>
-                            <input name="comment_by" <?php echo "value='".$_SESSION['userId']."'" ?> hidden>
-                            <input name="thread_ID" <?php echo "value='".$_GET['thread_id']."'" ?> hidden>
-                            <br>
-                            <input class="thread_button" type="submit" value="Kommentoi">
-                    </form>
-                    <hr>
-                </li>
-            </div>
+            //Uuden kommentin template
+            commentBox();
+        ?>
         </ol>
         <?php include("templates/footer.php") ?>
     </div>
     <script>
-        commentFilter();
+        //commentFilter();
+        Collapsible('new_thread_button');
     </script>
 </body>
 </html>

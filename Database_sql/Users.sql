@@ -1,8 +1,8 @@
 CREATE TABLE `users` (
   `user_ID` int(100) NOT NULL,
-  `user_firstname` varchar(20) DEFAULT NULL,
-  `user_lastname` varchar(20) DEFAULT NULL,
-  `password` varchar(20) DEFAULT NULL,
+  `user_firstname` varchar(20) NOT NULL,
+  `user_lastname` varchar(20) NOT NULL,
+  `password` varchar(60) NOT NULL,
   `user_email` varchar(20) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci;
 

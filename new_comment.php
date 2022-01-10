@@ -15,7 +15,12 @@ try{
                             VALUES('".$comment_content."','".$comment_date."','".$user_id."','".$thread_ID."')");
     $stmt->execute();
 
-    header("location: thread_page.php?thread_id=".$thread_ID."", true, 301);
+    $stmt_latestComment = $conn->prepare ("SELECT * FROM Comments ORDER BY comment_date DESC LIMIT 1");
+    $stmt_latestComment->execute();
+    
+    $latestComment = $stmt_latestComment->fetch();
+
+    header("location: thread_page.php?thread_id=".$thread_ID."#".$latestComment[0]."", true, 301);
 }
 catch (PDOException $e){
     echo $e->getMessage();

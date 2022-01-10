@@ -15,22 +15,24 @@ date_default_timezone_set('Europe/Helsinki');
     <script src="scripts.js"></script>
     <title>Front page</title>
 
-    <!--<script type=module src=scripts.js></script>-->
-
 </head>
 <body>
 
     <div class="container_front">
         
-        <?php include("templates/header.php") ?>
+        <?php
+        //Lisätään Header sivulle
+        include("templates/header.php")
+        ?>
 
+        <!-- Lisätään jokainen lanka listaan -->
         <ol class="listOf_threads">
 
-        <button class="new_thread_button" onclick="newComment()">Luo uusi lanka</button>
+        <!-- Uuden langan luonti -->
+        <button class="new_thread_button">Luo uusi lanka</button>
 
-        <!--comment box-->
         <div id="new_thread" class="new_thread">
-            <li><form method="POST" action="new_thread.php">
+            <form method="POST" action="new_thread.php">
                         <img name="" title="kuva" class="thread_img" type="image">
                         <input name="thread_img" type="file" accept ="image/png, image/jpeg" id="thread_img"><br>
                         <input name="thread_topic" name="topic" class="thread_topic" placeholder="Topic" required>
@@ -41,14 +43,14 @@ date_default_timezone_set('Europe/Helsinki');
                         <input name="thread_by" <?php echo "value='".$_SESSION['userId']."'" ?> hidden>
                         <br>
                         <input class="thread_button" type="submit" value="Post">
-                </form>
-                <hr>
-            </li>
+            </form>
+            <hr>
         </div>
         <?php
 
             require_once("database.php");
 
+            //haetaan kaikkien lankojen tiedot
             try{
                 $conn = ConnectToDB();
 
@@ -63,6 +65,7 @@ date_default_timezone_set('Europe/Helsinki');
                 $e->getMessage();
             }
 
+            //Lisätään jokainen lanka uutena lista elementtinä
             foreach($thread as $row){
                 echo "
                 <div class='thread'>
@@ -81,9 +84,16 @@ date_default_timezone_set('Europe/Helsinki');
             }
         ?>
         </ol>
-
-        <?php include("templates/footer.php") ?>
+        
+        <?php
+        //Lisätään footer sivulle
+        include("templates/footer.php")
+        ?>
 
     </div>
+    <script>
+        //EventListener langan luonti napille
+        Collapsible('new_thread_button');
+    </script>
 </body>
 </html>

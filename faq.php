@@ -76,7 +76,7 @@ date_default_timezone_set('Europe/Helsinki');
 
     </div>
     <script>
-        FAQcollapsible();
+        Collapsible('question');
     </script>
 </body>
 </html>

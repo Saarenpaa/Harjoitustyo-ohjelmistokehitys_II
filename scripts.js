@@ -1,39 +1,22 @@
 // Funktio joka hakee tyylitiedon CSS tiedostosta. Kopioitu stackoverflowsta.
-function getStyle(id, name){
+/*function getStyle(id, name){
   var element = document.getElementById(id);
   return element.currentStyle ? element.currentStyle[name] : window.getComputedStyle ? window.getComputedStyle(element, null).getPropertyValue(name) : null;
-};
+};*/
 
-// Funktio joka näyttää kommentti-kentän nappia painamalla.
-function newComment(){
+function Collapsible(className){
+  var buttons = document.getElementsByClassName(className);
+
+  for (var i = 0; i < buttons.length; i++) {
   
-  var new_thread = document.getElementById('new_thread');
-  var display_style = getStyle('new_thread', 'display');
-
-  if(display_style == 'none'){
-      new_thread.style.display = 'block';
-      setTimeout(new_thread.style.maxHeight = '1500px',1000);
-      //new_thread.style.transition = 'max-height 0.25s ease-in';
-  }
-  else{
-      new_thread.style.maxHeight = '0px';
-      new_thread.style.display = 'none';
-      //new_thread.style.transition = 'max-height 0.15s ease-out';
-  };
-};
-
-function FAQcollapsible(){
-  var kysymykset = document.getElementsByClassName("question");
-
-  for (var i = 0; i < kysymykset.length; i++) {
+  buttons[i].addEventListener("click", function() {
   
-  kysymykset[i].addEventListener("click", function() {
-  
-      var content = this.nextElementSibling;
-      if (content.style.display === "block") {
-      content.style.display = "none";
+      var collapsible = this.nextElementSibling;
+
+      if (collapsible.style.display === "block") {
+      collapsible.style.display = "none";
       } else {
-      content.style.display = "block";
+      collapsible.style.display = "block";
       }
   });
   };
@@ -42,8 +25,11 @@ function FAQcollapsible(){
 /*function commentFilter(){
   var filter = document.getElementById("filter");
 
-  filter.addEventListener("select", onselectionchange)
-  if (filter = )
-}*/
+  filter.addEventListener("change", function(){
 
-// Header
+    console.log(filter.value);
+    if (filter.value === 'vanhin ensin'){
+      window.location.reload();
+    }
+  });
+};*/

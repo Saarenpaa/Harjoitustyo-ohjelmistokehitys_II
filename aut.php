@@ -16,5 +16,4 @@ function tarkistaThreadId() {
         exit;
     }
 }
-
 ?>
