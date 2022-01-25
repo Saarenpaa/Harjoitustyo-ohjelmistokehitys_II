@@ -4,6 +4,7 @@
   return element.currentStyle ? element.currentStyle[name] : window.getComputedStyle ? window.getComputedStyle(element, null).getPropertyValue(name) : null;
 };*/
 
+// Nappi joka poistaa seuraavan divin näkyviltä tai tuo sen takaisin. Kätytän tätä lähinnä kommenttien ja aiheiden luomisessa.
 function Collapsible(className){
   var buttons = document.getElementsByClassName(className);
 
@@ -22,14 +23,20 @@ function Collapsible(className){
   };
 };
 
-/*function commentFilter(){
-  var filter = document.getElementById("filter");
+// Ajastin rekisteröitymisen kiitossivulle
+function timer(){
+    let timer = document.getElementById("timer");
 
-  filter.addEventListener("change", function(){
+    let seconds = 2;
+    setInterval(updateCountdown, 1000);
+    
+    function updateCountdown(){
+        timer.innerHTML = `${seconds}`;
+        seconds--;
+        console.log(seconds);
 
-    console.log(filter.value);
-    if (filter.value === 'vanhin ensin'){
-      window.location.reload();
-    }
-  });
-};*/
+        if(seconds < 0){
+            window.location.replace("index.php");
+        }
+      }
+}

@@ -1,11 +1,11 @@
 <?php
 
+session_start();
+
 include("aut.php");
 
 // Tarkistaa, että thread id on valittu, ettei tule erroreita.
 tarkistaThreadId();
-
-session_start();
 
 date_default_timezone_set('Europe/Helsinki');
 
@@ -54,7 +54,6 @@ function commentBox(){
         
         <?php
 
-            //include("get_thread_info.php");
             require_once("database.php");
 
             try{
@@ -64,19 +63,30 @@ function commentBox(){
                 
                 //Haetaan langan aiheen tiedot
                 $stmt_thread = $conn->prepare("SELECT Threads.*, Users.user_firstname, Users.user_lastname
-                                        FROM Threads
-                                        INNER JOIN Users ON Threads.user_id = Users.user_id
-                                        WHERE Threads.thread_ID = ".$thread_index."");
+                                               FROM Threads
+                                               INNER JOIN Users ON Threads.user_id = Users.user_id
+                                               WHERE Threads.thread_ID = ".$thread_index."");
                 $stmt_thread->execute();
                 $thread = $stmt_thread->fetchAll(PDO::FETCH_ASSOC);
+                
+                if(isset($_GET['sort']) && strlen(trim($_GET['sort'])) > 0){
+                    $sort = trim($_GET['sort']);
+                }
+                else{
+                    $sort = 'DESC';
+                }
+
+                $sqlComments="SELECT Comments.*, Users.user_firstname, Users.user_lastname, Threads.thread_ID
+                              FROM ((Comments
+                              INNER JOIN Users ON Comments.user_id = Users.user_id)
+                              INNER JOIN Threads ON Comments.thread_ID = Threads.thread_ID)
+                              WHERE Comments.thread_ID = :thread_index
+                              ORDER BY Comments.Comment_date ".$sort."";
+
+
 
                 //Haetaan kommenttien tiedot
-                $stmt_comments = $conn->prepare("SELECT Comments.*, Users.user_firstname, Users.user_lastname, Threads.thread_ID
-                                                FROM ((Comments
-                                                INNER JOIN Users ON Comments.user_id = Users.user_id)
-                                                INNER JOIN Threads ON Comments.thread_ID = Threads.thread_ID)
-                                                WHERE Comments.thread_ID = :thread_index
-                                                ORDER BY Comments.Comment_date DESC");
+                $stmt_comments = $conn->prepare($sqlComments);
                 $stmt_comments->bindParam(':thread_index', $thread_index);
                 $stmt_comments->execute();
 
@@ -100,20 +110,26 @@ function commentBox(){
                     </li>
                 </div>";
             };
-
+            // funktio joka säilyttää select tagin valinnan
+            function getSelection(){
+                if(!empty($_GET['sort']) && $_GET['sort'] == 'ASC'){
+                    echo 'selected';
+                }
+            }
             //Uuden kommentin template
             commentBox();
             ?>
             <div class='thread'>
                 <p class='thread_topic'>Kommentit:</p>
             <!-- kommenttien filteröinti -->
-                <form method="POST">
-                    <select onchange="this.form.submit()" name="filter" id="filter" class="filter">
-                        <option value="Uusin ensin">Uusin ensin</option>
-                        <option value="Vanhin ensin">Vanhin ensin</option>
+                    <input value="<?php echo $_GET['thread_id'] ?>" name="thread_id" type="hidden">
+                    <select onchange="location = this.value;" name="sort" id="sort" class="sort">
+                        <option value="thread_page.php?<?php echo 'thread_id='.$thread_index.''?>&sort=DESC">Uusin ensin</option>
+                        <option value="thread_page.php?<?php echo 'thread_id='.$thread_index.''?>&sort=ASC" <?php getSelection(); ?>>Vanhin ensin</option>
                     </select>
-                </form>
             </div>
+
+
             <hr>
 
             <?php

@@ -36,8 +36,8 @@
 }
 
 .footer{
-    grid-column-start: 1;
-    grid-column-end: 4;
+    grid-column: 1 / 4;
+    grid-row: 3;
     background-color: black;
     border-top: 1px solid white;
 }
@@ -73,6 +73,14 @@
     box-sizing: border-box;
 }
 
+.front_min_height{
+    grid-column: 2/3;
+    grid-row: 2;
+    min-height: 70vh;
+    margin: 0;
+    padding: 0;
+}
+
 .container{
     margin: auto;
     margin-top: 200px;
@@ -95,10 +103,9 @@
 /* thread content classes */
 
 .listOf_threads{
-    grid-column-start: 2;
-    grid-column-end: 3;
+    grid-column: 2 / 3;
+    grid-row: 2;
     border-left: 1px solid white;
-    min-height: 600px;
     padding-left: 10px;
 }
 .thread{
@@ -125,7 +132,7 @@
 .thread_topic{
     margin-bottom: 5px;
     text-align: left;
-    width: auto;
+    width: 400px;
     height: 20px;
     resize: none;
     overflow: hidden;
@@ -167,7 +174,7 @@
     margin-bottom: 5px;
     text-align: left;
     font-size: smaller;
-    width: 25vw;
+    width: 400px;
     height: auto;
     resize: none;
 }
@@ -176,7 +183,7 @@
     margin-bottom: 5px;
     text-align: left;
     font-size: smaller;
-    width: 25vw;
+    width: 400px;
     height: 250px;
     resize: none;
     white-space: normal;
@@ -195,6 +202,7 @@
     color: white;
     border-style: solid;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .new_thread_button{
@@ -204,6 +212,19 @@
     border-style: solid;
     border-radius: 5px;
     margin-left: 10px;
+    cursor: pointer;
+}
+.logout_div{
+    display: inline-flex;
+}
+.logout{
+    border: none;
+    background-color: black;
+    color: white;
+    border-style: solid;
+    border-radius: 5px;
+    margin-left: 10px;
+    cursor: pointer;
 }
 
 .thread_inputs{
@@ -294,11 +315,36 @@ a{
 
 /*FAQ end*/
 /*Contact us*/
+.container_contact{
+    display: flex;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    justify-content: center;
+    min-height: 70vh;
+}
 .italic_span{
     font-style: italic;
     font-size: smaller;
 }
-.filter{
+.sort{
     background-color: black;
     display: inline-flex;
+}
+.labels{
+    display: inline-block;
+}
+.inputs{
+    display: inline-block;
+    height: auto;
+    background: none;
+    margin-left: 30px;
+}
+.inputs > input{
+    background: transparent;
+}
+.inputs > input::after{
+    border-bottom: 5px solid white;
+}
+.inputs, .labels{
+    margin-top: 100px;
 }

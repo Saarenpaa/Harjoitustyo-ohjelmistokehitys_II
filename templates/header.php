@@ -12,7 +12,12 @@ tarkistaUserId();
 
             echo $fname." ".$lname."!";
         ?></a>
+        
     </div>
+    
+    <form method="POST" action="kirjaudu_ulos.php" class="logout_div">
+            <button type="submit" class="logout">Kirjaudu ulos</button>
+    </form>
     <div class="header_links">
         <a href="front_page.php">Home</a>
         <a href="contacts.php">Contacts</a>

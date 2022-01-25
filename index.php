@@ -1,4 +1,10 @@
-<?php session_start(); ?>
+<?php session_start();
+
+if(isset($_SESSION['email'])){
+    header('location: front_page.php', true, 301);
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">

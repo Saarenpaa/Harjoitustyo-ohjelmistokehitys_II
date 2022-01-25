@@ -36,6 +36,7 @@ try {
 			$_SESSION['email'] = $emailInDB;
 			$_SESSION['fname'] = $fname;
 			$_SESSION['lname'] = $lname;
+			$_SESSION['loggedIn'] = true;
 
 			//Päästä käyttäjä sisälle
 			header("Location: front_page.php", true, 301);

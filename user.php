@@ -23,17 +23,22 @@ date_default_timezone_set('Europe/Helsinki');
     <div class="container_front">
         
         <?php include("templates/header.php") ?>
-
-        <ol class="listOf_threads">
-            <div>
-                <li>
-                    <form>
-                        <label>Nimi:</label><input placeholder='<?php $_SESSION['fname'] ?>'>
-                    </form>
-                </li>
+            <div class="container_contact">
+                <form method="POST" action="modify_user.php">
+                    <div class="labels">
+                        <label>ID:</label><br><br>
+                        <label>Etunimi:</label><br><br>
+                        <label>Sukunimi:</label><br><br>
+                        <label>Sähköposti:</label><br><br>
+                    </div>
+                    <div class="inputs">
+                        <input placeholder='<?php echo $_SESSION['userId'] ?>' readonly></innput><br><br>
+                        <input placeholder='<?php echo $_SESSION['fname'] ?>'><br><br>
+                        <input placeholder='<?php echo $_SESSION['lname'] ?>'><br><br>
+                        <input placeholder='<?php echo $_SESSION['email'] ?>'><br><br>
+                    </div>
+                </form>
             </div>
-        </ol>
-
         <?php include("templates/footer.php") ?>
 
     </div>

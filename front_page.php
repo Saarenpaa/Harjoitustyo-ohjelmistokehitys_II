@@ -24,7 +24,7 @@ date_default_timezone_set('Europe/Helsinki');
         //Lisätään Header sivulle
         include("templates/header.php")
         ?>
-
+        <div class="front_min_height">
         <!-- Lisätään jokainen lanka listaan -->
         <ol class="listOf_threads">
 
@@ -33,8 +33,6 @@ date_default_timezone_set('Europe/Helsinki');
 
         <div id="new_thread" class="new_thread">
             <form method="POST" action="new_thread.php">
-                        <img name="" title="kuva" class="thread_img" type="image">
-                        <input name="thread_img" type="file" accept ="image/png, image/jpeg" id="thread_img"><br>
                         <input name="thread_topic" name="topic" class="thread_topic" placeholder="Topic" required>
                         <textarea name="thread_summary" maxlength="100" class="thread_summary" placeholder="Summary (max 100 characters)" required></textarea>
                         <textarea name="thread_content" class="thread_content" placeholder="Content" required></textarea>
@@ -74,7 +72,6 @@ date_default_timezone_set('Europe/Helsinki');
                         <input name='thread_id' type='text' value=".$row['thread_ID']." hidden>
                         <button type='submit' class='thread_topic_button'>".$row['thread_topic']."</button>
                         </form>
-                        <img class='thread_image'></img>
                         <p class='thread_summary'>".$row['thread_summary']."</p>
                         <br>
                         <p class='timestamp'>".date('d.m.Y H:i', strtotime($row['thread_date']))." by ".$row['user_firstname']." ".$row['user_lastname']."</p>
@@ -83,6 +80,7 @@ date_default_timezone_set('Europe/Helsinki');
                 </div>";
             }
         ?>
+        </div>
         </ol>
         
         <?php

@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="tyyli.css">
+    <script type="text/javascript" src="scripts.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -14,20 +15,7 @@
         <p id="timer">3</p>
     </div>
     <script>
-        let timer = document.getElementById("timer");
-
-        let seconds = 2;
-        setInterval(updateCountdown, 1000);
-        
-        function updateCountdown(){
-            timer.innerHTML = `${seconds}`;
-            seconds--;
-            console.log(seconds);
-
-            if(seconds < 0){
-                window.location.replace("index.php");
-            }
-        }
+        timer();
     </script>
 </body>
 </html>
