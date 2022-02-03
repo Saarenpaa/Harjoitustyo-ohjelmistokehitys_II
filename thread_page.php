@@ -11,16 +11,12 @@ date_default_timezone_set('Europe/Helsinki');
 
 //Uuden kommentin template
 function commentBox(){
-    $date = date('Y-m-d H:i');
     echo'
         <button class="new_thread_button">Kommentoi</button>
 
         <div id="new_thread" class="new_thread">
             <li><form method="POST" action="new_comment.php">
                         <textarea name="comment_content" class="comment_content" placeholder="Comment" required></textarea>
-                        <!--        Get the date and time with php      v         -->
-                        <input name="comment_date" value="'.$date.'" hidden>
-                        <input name="comment_by" value="'.$_SESSION['userId'].'" hidden>
                         <input name="thread_ID" value="'.$_GET['thread_id'].'" hidden>
                         <br>
                         <input class="thread_button" type="submit" value="Lähetä">
@@ -70,7 +66,8 @@ function commentBox(){
                 $thread = $stmt_thread->fetchAll(PDO::FETCH_ASSOC);
                 
                 if(isset($_GET['sort']) && strlen(trim($_GET['sort'])) > 0){
-                    $sort = trim($_GET['sort']);
+                    //addslashes kuulemma suojaa tietokantaa. En ymmärrä miten, mutta lisäsin sen kuitenkin :)
+                    $sort = addslashes(trim($_GET['sort']));
                 }
                 else{
                     $sort = 'DESC';
@@ -120,7 +117,7 @@ function commentBox(){
             commentBox();
             ?>
             <div class='thread'>
-                <p class='thread_topic'>Kommentit:</p>
+                <p class='otsikko'>Kommentit:</p>
             <!-- kommenttien filteröinti -->
                     <input value="<?php echo $_GET['thread_id'] ?>" name="thread_id" type="hidden">
                     <select onchange="location = this.value;" name="sort" id="sort" class="sort">
@@ -154,8 +151,12 @@ function commentBox(){
         <?php include("templates/footer.php") ?>
     </div>
     <script>
+        document.addEventListener("DOMContentLoaded", function() { 
         //commentFilter();
         Collapsible('new_thread_button');
+        fixPos();
+        glow();
+});
     </script>
 </body>
 </html>

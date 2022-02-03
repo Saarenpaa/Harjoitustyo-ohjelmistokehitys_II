@@ -13,12 +13,17 @@ date_default_timezone_set('Europe/Helsinki');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="tyyli.css">
     <script src="scripts.js"></script>
-    <title>Front page</title>
+    <title>User info</title>
 
     <!--<script type=module src=scripts.js></script>-->
 
 </head>
 <body>
+<?php
+
+require_once('database.php');
+
+?>
 
     <div class="container_front">
         
@@ -32,10 +37,13 @@ date_default_timezone_set('Europe/Helsinki');
                         <label>Sähköposti:</label><br><br>
                     </div>
                     <div class="inputs">
-                        <input placeholder='<?php echo $_SESSION['userId'] ?>' readonly></innput><br><br>
-                        <input placeholder='<?php echo $_SESSION['fname'] ?>'><br><br>
-                        <input placeholder='<?php echo $_SESSION['lname'] ?>'><br><br>
-                        <input placeholder='<?php echo $_SESSION['email'] ?>'><br><br>
+                        <input name='userId' placeholder='<?php echo $_SESSION['userId'] ?>' readonly></innput><br><br>
+                        <input name='fname' placeholder='<?php echo $_SESSION['fname'] ?>'><br><br>
+                        <input name='lname' placeholder='<?php echo $_SESSION['lname'] ?>'><br><br>
+                        <input name='email' placeholder='<?php echo $_SESSION['email'] ?>'><br><br>
+                    </div>
+                    <div>
+                        <button class="new_thread_button" style="margin-left: 105px; width: auto;">Muuta tietoja</button>
                     </div>
                 </form>
             </div>

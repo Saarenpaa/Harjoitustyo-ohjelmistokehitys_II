@@ -40,3 +40,27 @@ function timer(){
         }
       }
 }
+
+function glow(){
+  setTimeout(() => {
+      let hash = window.location.hash;
+      if(hash != ''){
+          latestElement = document.getElementById(hash.substring(1).toString());
+
+          latestElement.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+          alert("postaus onnistui!")
+      }
+  }, 2);
+}
+
+function fixPos(){
+  setTimeout(() => {
+    let hash = window.location.hash
+    if(hash != ''){
+      let offset = document.documentElement.scrollTop - 120;
+      window.scrollTo({
+        top: offset
+      });
+    }
+  }, 2);
+}

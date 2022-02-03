@@ -1,10 +1,11 @@
 <?php
+session_start();
 
 require_once("database.php");
 
 $comment_content = $_POST['comment_content'];
-$comment_date = $_POST['comment_date'];
-$user_id = $_POST['comment_by'];
+$comment_date = date('Y-m-d H:i:s');
+$user_id = $_SESSION['userId'];
 $thread_ID = $_POST['thread_ID'];
 
 

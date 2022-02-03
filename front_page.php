@@ -17,33 +17,46 @@ date_default_timezone_set('Europe/Helsinki');
 
 </head>
 <body>
-
+    <!-- CSS grid -->
     <div class="container_front">
         
         <?php
         //Lisätään Header sivulle
-        include("templates/header.php")
+        include("templates/header.php");
+
+        //lajittelu selectissä näkyvä valinta määritetään tässä
+        function getSelection(){
+            if(!empty($_GET['sort']) && $_GET['sort'] == 'ASC'){
+                echo 'selected';
+            }
+        }
         ?>
         <div class="front_min_height">
         <!-- Lisätään jokainen lanka listaan -->
         <ol class="listOf_threads">
 
-        <!-- Uuden langan luonti -->
+        <div class="thread">
+            <h1 class="otsikko"> Foorumin langat: </h1>
+            <select onchange="location = this.value;" name="sort" id="sort" class="sort">
+                <option value="front_page.php?sort=DESC">Uusin ensin</option>
+                <option value="front_page.php?sort=ASC" <?php getSelection(); ?>>Vanhin ensin</option>
+            </select>
+        </div>
+        <br><br>
+        <!-- Uuden langan luonti painike -->
         <button class="new_thread_button">Luo uusi lanka</button>
-
+        
         <div id="new_thread" class="new_thread">
             <form method="POST" action="new_thread.php">
                         <input name="thread_topic" name="topic" class="thread_topic" placeholder="Topic" required>
                         <textarea name="thread_summary" maxlength="100" class="thread_summary" placeholder="Summary (max 100 characters)" required></textarea>
                         <textarea name="thread_content" class="thread_content" placeholder="Content" required></textarea>
-                        <!--        Get the date and time with php      v         -->
-                        <input name="thread_date" <?php echo "value='".date('Y-m-d H:i')."'"; ?> hidden>
-                        <input name="thread_by" <?php echo "value='".$_SESSION['userId']."'" ?> hidden>
                         <br>
                         <input class="thread_button" type="submit" value="Post">
             </form>
             <hr>
         </div>
+        
         <?php
 
             require_once("database.php");
@@ -52,10 +65,12 @@ date_default_timezone_set('Europe/Helsinki');
             try{
                 $conn = ConnectToDB();
 
+
+                $sort = $_GET['sort'] ?? 'DESC';
                 $stmt = $conn->prepare("SELECT Threads.*, Users.user_firstname, Users.user_lastname
                                         FROM Threads
-                                            INNER JOIN Users ON Threads.user_id = Users.user_id
-                                            ORDER BY thread_date");
+                                        INNER JOIN Users ON Threads.user_id = Users.user_id
+                                        ORDER BY thread_date ".$sort."");
                 $stmt->execute();
                 $thread = $stmt->fetchAll();
             }
@@ -66,7 +81,7 @@ date_default_timezone_set('Europe/Helsinki');
             //Lisätään jokainen lanka uutena lista elementtinä
             foreach($thread as $row){
                 echo "
-                <div class='thread'>
+                <div class='thread' id=".$row['thread_ID'].">
                     <li>
                         <form method='GET' action ='thread_page.php'>
                         <input name='thread_id' type='text' value=".$row['thread_ID']." hidden>
@@ -92,6 +107,8 @@ date_default_timezone_set('Europe/Helsinki');
     <script>
         //EventListener langan luonti napille
         Collapsible('new_thread_button');
+        glow();
+        fixPos();
     </script>
 </body>
 </html>
