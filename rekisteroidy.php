@@ -9,7 +9,7 @@ $lname = $_POST['lname'];
 $password = $_POST['password'];
 $email = $_POST['email'];
 
-//Salataan salasana PHP:n oletus hashin avulla
+//Salataan salasana PHP:n oletus hashing algoritmin avulla
 $passInDB = password_hash($password, PASSWORD_DEFAULT);
 
 //Syötetään käyttäjän tiedot tietokantaan ja uudelleenohjataan kiitos -sivulle

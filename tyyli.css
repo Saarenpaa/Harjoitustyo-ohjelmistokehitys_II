@@ -333,6 +333,7 @@ a{
 }
 
 /*FAQ end*/
+
 /*Contact us*/
 .container_contact{
     display: flex;
@@ -367,3 +368,5 @@ a{
 .inputs, .labels{
     margin-top: 100px;
 }
+
+/*Contact us end*/

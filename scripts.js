@@ -1,10 +1,6 @@
-// Funktio joka hakee tyylitiedon CSS tiedostosta. Kopioitu stackoverflowsta.
-/*function getStyle(id, name){
-  var element = document.getElementById(id);
-  return element.currentStyle ? element.currentStyle[name] : window.getComputedStyle ? window.getComputedStyle(element, null).getPropertyValue(name) : null;
-};*/
 
-// Nappi joka poistaa seuraavan divin näkyviltä tai tuo sen takaisin. Kätytän tätä lähinnä kommenttien ja aiheiden luomisessa.
+// Nappi joka poistaa seuraavan divin näkyvistä tai tuo sen takaisin.
+// Käytän tätä lähinnä kommenttien ja aiheiden luomisessa.
 function Collapsible(className){
   var buttons = document.getElementsByClassName(className);
 
@@ -41,6 +37,7 @@ function timer(){
       }
 }
 
+// Highlighttaa uusimman postauksen
 function glow(){
   setTimeout(() => {
       let hash = window.location.hash;
@@ -53,6 +50,7 @@ function glow(){
   }, 2);
 }
 
+// Scrollaa ikkunan hieman ylemmäs, ettei postaus ole täysin kiinni sivun yläreunassa
 function fixPos(){
   setTimeout(() => {
     let hash = window.location.hash

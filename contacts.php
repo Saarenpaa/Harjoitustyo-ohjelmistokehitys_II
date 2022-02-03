@@ -30,7 +30,7 @@ date_default_timezone_set('Europe/Helsinki');
             <span>Puhnro: 050123123</span><br>
             <span>sposti: mail@mail.com</span>
 
-            <!-- toimii vain localhostilla, koska pitäisi muokata php. ini tiedostoa -->
+            <!-- Oli tarkoituksena tehdä phpllä email boxi mutta käsitin että se ei olisi toiminut u-levyllä -->
             <form method="POST" action="mail.php">
                 <h1>Lähetä tukeen sähköpostia:</h1>
                 <a href="mailto: ylläpitäjä@ei_oikea_sposti.fi">ylläpitäjä@ei_oikea_sposti.fi</a>

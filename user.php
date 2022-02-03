@@ -15,8 +15,6 @@ date_default_timezone_set('Europe/Helsinki');
     <script src="scripts.js"></script>
     <title>User info</title>
 
-    <!--<script type=module src=scripts.js></script>-->
-
 </head>
 <body>
 <?php
